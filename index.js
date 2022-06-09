@@ -12,8 +12,8 @@ const jwt = require('jsonwebtoken');
 //global.fetch = require('node-fetch');
 
 const poolData = {    
-    UserPoolId : "us-east-2_c3MNGk6x0", // Your user pool id here    
-    ClientId : "tcf1d6qkb6kqrpqo6nmqeajtf" // Your client id here
+    UserPoolId : "us-east-2_T9l6jcW60", // Your user pool id here    
+    ClientId : "545v6pj3vfe4116dva0jv97h86" // Your client id here
     }; 
 const pool_region = 'us-east-2';
 
@@ -29,33 +29,55 @@ app.get('/products', (req, res) => {
 
 app.post('/signup', (req, res) => {
     var attributeList = [];
-    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"nombre",Value: req.body.nombre}));
-    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"apellido",Value: req.body.apellido}));
-    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"telefono",Value: req.body.telefono}));
+    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"name",Value: req.body.nombre}));
+    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"middle_name",Value: req.body.apellido}));
+    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"phone_number",Value: req.body.telefono}));
     attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"email",Value: req.body.email}));
-    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"password",Value: req.body.password}));
+    //attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"password",Value: req.body.password}));
 
     userPool.signUp(req.body.email, req.body.password, attributeList, null, function(err, result){
         if (err) {
             console.log(err);
-            res.json(err);
+            res.json(err.name);
             return;
         }
         cognitoUser = result.user;
         console.log('Nombre de usuario es: ' + cognitoUser.getUsername());
-        res.json({
-            bienvenido: `${cognitoUser.getUsername()}`
-        })
+        res.json("ok")
     });
 });
 
 app.post('/signin', (req, res) => {
-    console.log("JSON:" + JSON.stringify(req.body));
-    res.json([
-        {
-            usuario: "Login Correcto"
-        }
-    ])
+    var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
+        Username : req.body.email,
+        Password : req.body.password,
+    });
+
+    var userData = {
+        Username : req.body.email,
+        Pool : userPool
+    };
+    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: function (result) {
+            //console.log('access token + ' + result.getAccessToken().getJwtToken());
+            //console.log('id token + ' + result.getIdToken().getJwtToken());
+            //console.log('refresh token + ' + result.getRefreshToken().getToken());
+            res.json([
+                {
+                    login: "Login Correcto"
+                }
+            ])
+        },
+        onFailure: function(err) {
+            res.json([
+                {
+                    login: "Login Incorrecto"
+                }
+            ])
+        },
+
+    });
 });
 
 app.put('/', (req, res) => {
