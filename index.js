@@ -27,6 +27,23 @@ app.get('/products', (req, res) => {
     res.json(productos)
 });
 
+app.post('/confirm', (req, res) => {
+    var userData = {
+        Username : req.body.email,
+        Pool : userPool
+    }
+    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+    cognitoUser.confirmRegistration(req.body.code, true, function(err, result){
+        if (err) {
+            console.log(err);
+            res.json(err.code);
+            return
+        }
+        res.json("ok")
+    });
+});
+
 app.post('/signup', (req, res) => {
     var attributeList = [];
     attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"name",Value: req.body.nombre}));
@@ -70,11 +87,7 @@ app.post('/signin', (req, res) => {
             ])
         },
         onFailure: function(err) {
-            res.json([
-                {
-                    login: "Login Incorrecto"
-                }
-            ])
+            res.json(err.name)
         },
 
     });
