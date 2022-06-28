@@ -13,6 +13,7 @@
     "aws-sdk": "^2.1150.0",
     "cors": "^2.8.5",
     "express": "^4.18.1",
+    "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "jwk-to-pem": "^2.0.5",
     "node-fetch": "^3.2.5",
