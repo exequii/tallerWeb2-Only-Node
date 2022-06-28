@@ -13,6 +13,17 @@ router.get("/", (req,res,next)=>{
     }
 })
 
+router.get("/:id", (req,res,next)=>{
+    try{
+        const {id} = req.params
+        const producto = getOneProduct(id)
+        console.log(producto)
+        res.status(200).json(producto)
+    }catch(error){
+        next(error)
+    }
+})
+
 router.post("/newProduct",
     validatorHandler(createProductSchema,'body'),
     (req,res,next)=>{

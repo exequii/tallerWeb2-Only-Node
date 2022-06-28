@@ -13,8 +13,9 @@ function getAll(){
     return products
 }
 
-async function getOne(codigo){
-
+function getOne(codigo){
+    var producto = products.find(producto => producto.codigo === codigo)
+    return producto
 }
 
 async function createNew(){
