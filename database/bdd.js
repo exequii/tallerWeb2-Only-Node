@@ -1,5 +1,5 @@
 const db = require("mongoose")
-const {POOL_DATA, MONGO_URI} = "../config"
+const {POOL_DATA, MONGO_URI} = "../utilities/config"
 const products = require("../productos")
 
 // db.Promise = global.Promise;

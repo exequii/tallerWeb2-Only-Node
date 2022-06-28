@@ -2,7 +2,7 @@ const express = require('express');
 const validatorHandler = require('../middleware/validator.handler');
 const { signUpUserSchema, signInUserSchema, confirmUserSchema } = require('../schemas/user.schema');
 const router = express.Router();
-const {POOL_DATA, MONGO_URI} = require("../config")
+const {POOL_DATA, MONGO_URI} = require("../utilities/config")
 
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 // const AWS = require('aws-sdk');
