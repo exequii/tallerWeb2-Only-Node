@@ -4,7 +4,11 @@ function validatorHandler(schema, property) {
   return (req, res, next) => {
     const data = req[property];
     const { error } = schema.validate(data, { abortEarly: false });
-    error ? boom.badRequest("El formato de los datos ingresados no son validos.") : next();
+    console.log(error)
+    if(error){
+      throw boom.badRequest("El formato de los datos ingresados no son validos.")
+    } 
+    next();
   }
 }
 

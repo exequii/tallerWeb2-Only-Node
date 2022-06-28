@@ -24,7 +24,6 @@ router.post('/confirm',
     
         cognitoUser.confirmRegistration(confirm_code, true, function(err, result){
             if (err) {
-                console.log(err);
                 res.json(err.code);
                 return
             }
@@ -49,12 +48,10 @@ router.post('/signup',
     
             userPool.signUp(email, password, attributeList, null, function(err, result){
                 if (err) {
-                    console.log(err);
                     res.json(err.name);
                     return;
                 }
                 cognitoUser = result.user;
-                console.log('Nombre de usuario es: ' + cognitoUser.getUsername());
                 res.status(201).json("ok")
         });
         }catch(error){
