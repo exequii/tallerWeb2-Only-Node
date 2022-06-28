@@ -1,47 +1,28 @@
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'admin',
-    database: 'taller',
-    port: 3306
- });
+const db = require("mongoose")
+const {POOL_DATA, MONGO_URI} = "../config"
+const products = require("../productos")
 
+// db.Promise = global.Promise;
+// db.connect(MONGO_URI, {
+//     useNewUrlParser: true
+// });
 
-function conectarBdd(connection){
-    connection.connect(function(error){
-        if(error){
-           throw error;
-        }else{
-           console.log('Conexion correcta.');
-        }
-     });
- }
+//console.log("Conectado a la base de datos")
 
-function insertData(){
-        var query = connection.query(
-        'INSERT INTO product values (?,?,?)', [1,'Producto1 prem', 'Producto de primera calidad'], 
-        function(error, result){
-        if(error){
-            throw error;
-        }else{
-            console.log(result);
-        }
-    });
+function getAll(){
+    return products
 }
 
-function getData(){ 
-
-    var query = connection.query(
-     'SELECT * FROM smartwatchs', [], 
-     function(error, result){
-        if(error){
-            throw error;
-        }else{
-            console.log(result);
-        }
-    });
+async function getOne(codigo){
 
 }
 
-connection.end();
+async function createNew(){
+    
+}  
+
+async function deleteOne(codigo){
+
+}
+
+module.exports = {getAll, getOne, createNew, deleteOne}

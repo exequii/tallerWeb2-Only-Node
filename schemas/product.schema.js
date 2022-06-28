@@ -20,6 +20,10 @@ const createProductSchema = Joi.object({
     cantidad: cantidad.required()
 });
 
+const getProductSchema = Joi.object({
+    codigo: codigo.required()
+});
 
-module.exports = createProductSchema;
+
+module.exports = {createProductSchema, getProductSchema};
 

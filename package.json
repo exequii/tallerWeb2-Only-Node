@@ -9,6 +9,7 @@
   "author": "Sanson, Saavedra, Charlin, Gonzales",
   "license": "ISC",
   "dependencies": {
+    "@hapi/boom": "^10.0.0",
     "amazon-cognito-identity-js": "^5.2.9",
     "aws-sdk": "^2.1150.0",
     "cors": "^2.8.5",
@@ -16,8 +17,10 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "jwk-to-pem": "^2.0.5",
+    "mongoose": "^6.4.1",
     "node-fetch": "^3.2.5",
     "nodemon": "^2.0.16",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "sequelize": "^6.21.1"
   }
 }

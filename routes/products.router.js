@@ -1,12 +1,35 @@
 const express = require('express');
 const router = express.Router();
-//const createProductSchema = require('../schemas/product.schema');
-const productos = require(".././productos")
+const validatorHandler = require('../middleware/validator.handler');
+const {createProductSchema, getProductSchema} = require('../schemas/product.schema');
+const {getAllProducts, getOneProduct, createNewProduct, deleteProduct} = require('../services/products.service');
 
-router.get("/", (req,res)=>{
-    res.json(productos)
-    if(err){
-        console.log("error")
+router.get("/", (req,res,next)=>{
+    try{
+        const productos = getAllProducts()
+        res.status(200).json(productos)
+    }catch(error){
+        next(error)
+    }
+})
+
+router.post("/newProduct",
+    validatorHandler(createProductSchema,'body'),
+    (req,res,next)=>{
+    try{
+        console.log("crea un elemento de la bdd")
+    }catch(error){
+        next(error)
+    }
+})
+
+router.delete("/deleteProduct:id",
+    validatorHandler(getProductSchema,'body'),
+    (req,res,next)=>{
+    try{
+        console.log("borra un elemento de la bdd")
+    }catch(error){
+        next(error)
     }
 })
 

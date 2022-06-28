@@ -14,4 +14,4 @@ const POOL_DATA = {
     ClientId: CLIENT_ID
 }
 
-module.exports = POOL_DATA
+module.exports = {POOL_DATA, MONGO_URI, MONGO_DB};
