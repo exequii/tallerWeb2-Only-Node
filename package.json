@@ -4,7 +4,8 @@
   "description": "BackEnd del Proyecto de Taller Web 2 de la UnLaM",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ."
   },
   "author": "Sanson, Saavedra, Charlin, Gonzales",
   "license": "ISC",
