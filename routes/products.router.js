@@ -17,7 +17,6 @@ router.get("/:id", (req,res,next)=>{
     try{
         const {id} = req.params
         const producto = getOneProduct(id)
-        console.log(producto)
         res.status(200).json(producto)
     }catch(error){
         next(error)
@@ -34,7 +33,7 @@ router.post("/newProduct",
     }
 })
 
-router.delete("/deleteProduct:id",
+router.delete("/deleteProduct/:id",
     validatorHandler(getProductSchema,'body'),
     (req,res,next)=>{
     try{
