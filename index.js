@@ -3,15 +3,19 @@ var cors = require('cors')
 const app = express();
 const routerApi = require('./routes');
 const { logErrors, errorHandler, boomErrorHandler, ormErrorHandler } = require('./middleware/error.handler');
+const { conectarDB } = require('./database/bdd');
 
-app.use(express.json());
 app.use(cors())
+
+conectarDB();
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Conexion funcionando');
 });
 
 routerApi(app)
+
 
 app.use(logErrors);
 app.use(ormErrorHandler);

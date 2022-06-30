@@ -4,15 +4,12 @@ const validatorHandler = require('../middleware/validator.handler');
 const {createProductSchema, getProductSchema} = require('../schemas/product.schema');
 const {getAllProducts, getOneProduct, createNewProduct, deleteProduct} = require('../services/products.service');
 
-router.get("/", (req,res,next)=>{
-    try{
-        const productos = getAllProducts()
-        res.status(200).json(productos)
-    }catch(error){
-        next(error)
-    }
-})
+router.get("/",getAllProducts)
+router.get("/:codigo",validatorHandler(getProductSchema,'params'),getOneProduct)
+router.delete("/:codigo",validatorHandler(getProductSchema,'body'),deleteProduct)
+router.post("/newProduct",validatorHandler(createProductSchema,'body'),createNewProduct);
 
+<<<<<<< HEAD
 router.get("/:id", (req,res,next)=>{
     try{
         const {id} = req.params
@@ -42,6 +39,8 @@ router.delete("/deleteProduct/:id",
         next(error)
     }
 })
+=======
+>>>>>>> 556e00bb9aaf0d232c13e5c77c9d906447afcffa
 
 module.exports = router;
 
