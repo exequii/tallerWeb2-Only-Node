@@ -8,8 +8,6 @@ function routerApi(app) {
     app.use('/api/v1', router);
     router.use('/products', productsRouter);
     router.use('/user', cognitoRouter);
-    router.use('/user', cognitoRouter);
-    router.use('/user', cognitoRouter);
 }
   
 module.exports = routerApi;
