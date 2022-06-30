@@ -1,13 +1,12 @@
 const products = require(".././productos")
-const { getAll, getOne, createNew, deleteOne } = require("../database/bdd");
 const Producto = require("../models/Producto");
 
 
-async function getOneProduct(req,res){
-    const id = req.params.id
-    console.log(id)
+async function getOneProduct(req,res,next){
+    const {codigo} = req.params
+    console.log(codigo)
     try {
-        let producto = await Producto.findOne({'codigo' : id})
+        let producto = await Producto.findOne({'codigo' : codigo})
 
         if(!producto) {
             res.status(404).json({ msg: 'No existe el producto'})
@@ -19,10 +18,11 @@ async function getOneProduct(req,res){
     
     } catch (error) {
         console.log(error)
+        next(error)
     }
 }
 
-function createNewProduct(req){
+function createNewProduct(req,res,next){
     try {
         let producto ;
 
@@ -32,16 +32,18 @@ function createNewProduct(req){
         console.log("El producto ha sido guardado correctamente");
     } catch (error) {
         console.log(error)
+        next(error)
     }
 
 }
 
-async function getAllProducts(req, res){
+async function getAllProducts(req, res,next){
     try {
         const productos = await Producto.find()
         res.status(200).json(productos)
     } catch (error) {
         console.log(error)
+        next(error)
     }
 
 }
@@ -62,6 +64,7 @@ async function deleteProduct(req,res){
         
     } catch (error) {
         console.log(error)
+        next(error)
     }
 }
 
