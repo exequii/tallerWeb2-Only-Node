@@ -5,13 +5,13 @@ const middle_name = Joi.string().min(3).max(15);
 const phone_number = Joi.string().min(3).max(15);
 const email = Joi.string().min(3).max(40).email();
 const password = Joi.string().min(3).max(15);
-const confirm_code = Joi.string().min(6).max(6);
+const confirm_code = Joi.string().min(0).max(8);
 
 
 const signUpUserSchema = Joi.object({
-    name: name.required(),
-    middle_name: middle_name.required(),
-    phone_number: phone_number.required(),
+    nombre: name.required(),
+    apellido: middle_name.required(),
+    telefono: phone_number.required(),
     email: email.required(),
     password: password.required()
 });
@@ -23,7 +23,7 @@ const signInUserSchema = Joi.object({
 
 const confirmUserSchema = Joi.object({
     email: email.required(),
-    confirm_code: confirm_code.required()
+    code: confirm_code.required()
 })
 
 
