@@ -9,6 +9,5 @@ router.get("/:codigo",validatorHandler(getProductSchema,'params'),getOneProduct)
 router.delete("/:codigo",validatorHandler(getProductSchema,'body'),deleteProduct)
 router.post("/newProduct",validatorHandler(createProductSchema,'body'),createNewProduct);
 
-
 module.exports = router;
 
