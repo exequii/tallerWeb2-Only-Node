@@ -30,6 +30,7 @@ function createNewProduct(req,res,next){
 
         producto.save();
         console.log("El producto ha sido guardado correctamente");
+        res.status(200).json("ok");
     } catch (error) {
         console.log(error)
         next(error)

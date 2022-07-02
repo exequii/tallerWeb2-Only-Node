@@ -18,6 +18,7 @@ function nuevaCompra(req,res,next){
 
         compra.save();
         console.log("La compra ha sido guardado correctamente");
+        res.status(200).json("ok");
     } catch (error) {
         console.log(error)
         next(error)
